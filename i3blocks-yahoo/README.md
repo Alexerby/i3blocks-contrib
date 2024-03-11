@@ -12,7 +12,7 @@ interval=<interval>
 command=$SCRIPT_DIR/i3blocks-contrib/i3blocks-yahoo/latest.py <ticker>
 ```
 
-Example
+Example Nasdaq 100
 
 ```ini
 [indice]
