@@ -5,7 +5,6 @@ import yfinance as yf
 import sys
 
 PRICE_CHANGE_PERIOD = '1d'  # You can adjust this period as needed
-PRICE_CHANGE_URGENT_PERCENT = 3  # Adjust as needed
 
 def get_ticker(ticker):
     try:
@@ -39,6 +38,4 @@ if __name__ == "__main__":
 
         print(('{:.2f} <span color="{}">{} {:.2f}%</span>').format(index_value, color, icon, percent_change))
         
-        # Optionally, you can exit with a specific code if the percentage change is urgent
-        if abs(percent_change) > PRICE_CHANGE_URGENT_PERCENT:
-            exit(33)
+
