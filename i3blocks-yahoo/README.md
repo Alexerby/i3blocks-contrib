@@ -23,4 +23,7 @@ command=$SCRIPT_DIR/i3blocks-contrib/i3blocks-yahoo/latest.py ^NDX
 ```
 
 ## Ticker
-Find all tickerson Yahoo Finance [here](https://finance.yahoo.com/lookup/).
+Find all tickerson Yahoo Finance [here](https://finance.yahoo.com/lookup/).A
+
+## Preview
+![Selection_007](https://github.com/Alexerby/i3blocks-contrib/assets/57099109/98fe09b3-5186-4780-bdac-1cb81428e2a3)
