@@ -1,0 +1,17 @@
+#!/bin/bash
+
+partition="$1"
+result=$(df -a | awk -v partition="$partition" 'tolower($1) ~ tolower(partition) {
+    size_gb = $4 / (1024^2);
+
+    if (size_gb < 0.5)
+        printf "%.2fGB", size_gb;
+    else if (size_gb < 10)
+        printf "%.1fGB", size_gb;
+    else
+        printf "%.0fGB", size_gb;
+    exit
+}')
+
+echo "$result"
+
