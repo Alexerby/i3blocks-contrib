@@ -29,13 +29,21 @@ if __name__ == "__main__":
         sys.exit(1)
     
     ticker = sys.argv[1]
-    index_value, percent_change = get_ticker(ticker)
-    if index_value is not None and percent_change is not None:
+    ticker_value, percent_change = get_ticker(ticker)
+    if ticker_value is not None and percent_change is not None:
         # Determine the color and icon based on the percentage change
         color = '#3BB92D' if percent_change > 0 else '#F7555E'
         icon = '🠕' if percent_change > 0 else '🠗'
-        
 
-        print(('{:.2f} <span color="{}">{} {:.2f}%</span>').format(index_value, color, icon, percent_change))
+        if ticker_value > 100:
+            decimal_places = 0
+        elif ticker_value < 100:
+            decimal_places = 1
+        elif ticker_value < 50:
+            decimal_places = 2
+
         
+        output_format='{:.{}f} <span color="{}">{} {:.2f}%</span>'
+        print(output_format.format(ticker_value, decimal_places, color, icon, percent_change))
+
 
