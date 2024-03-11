@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ifconfig | awk '/inet / {print $2; exit}'
+
