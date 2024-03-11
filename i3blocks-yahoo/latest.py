@@ -7,7 +7,7 @@ import sys
 PRICE_CHANGE_PERIOD = '1d'  # You can adjust this period as needed
 PRICE_CHANGE_URGENT_PERCENT = 3  # Adjust as needed
 
-def get_index(ticker):
+def get_ticker(ticker):
     try:
         # Fetch data
         data = yf.Ticker(ticker)
@@ -30,7 +30,7 @@ if __name__ == "__main__":
         sys.exit(1)
     
     ticker = sys.argv[1]
-    index_value, percent_change = get_index(ticker)
+    index_value, percent_change = get_ticker(ticker)
     if index_value is not None and percent_change is not None:
         # Determine the color and icon based on the percentage change
         color = '#3BB92D' if percent_change > 0 else '#F7555E'
