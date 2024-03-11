@@ -1,2 +1,26 @@
 # i3blocks-yahoo
-Yahoo Finance API | Latest Price
+
+This is a script utilizing Yahoo Finance API to display the latest price in i3blocks.
+
+## Configuration
+
+```ini
+[<label>]
+label=<label>
+instance=<label>
+interval=<interval>
+command=$SCRIPT_DIR/i3blocks-yahoo/latest.py <ticker>
+```
+
+Example
+
+```ini
+[indice]
+label=NDX100
+instance=NDX
+interval=60
+command=$SCRIPT_DIR/i3blocks-yahoo/latest.py ^NDX
+```
+
+## Ticker
+Find all tickerson Yahoo Finance [here](https://finance.yahoo.com/lookup/).
