@@ -4,7 +4,6 @@
 import yfinance as yf
 import sys
 
-API_KEY = "<YOUR_API_KEY_HERE>"
 PRICE_CHANGE_PERIOD = '1d'  # You can adjust this period as needed
 PRICE_CHANGE_URGENT_PERCENT = 3  # Adjust as needed
 
