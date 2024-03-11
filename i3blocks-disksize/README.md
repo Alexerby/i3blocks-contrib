@@ -30,3 +30,6 @@ interval=100
 ```
 
 > Note that label may not be visible in this README markdown.
+
+### Preview
+![Selection_008](https://github.com/Alexerby/i3blocks-contrib/assets/57099109/c2fc4ee9-d063-4514-96ec-211e6e98b9d9)
