@@ -9,7 +9,7 @@ This is a script utilizing Yahoo Finance API to display the latest price in i3bl
 label=<label>
 instance=<label>
 interval=<interval>
-command=$SCRIPT_DIR/i3blocks-yahoo/latest.py <ticker>
+command=$SCRIPT_DIR/i3blocks-contrib/i3blocks-yahoo/latest.py <ticker>
 ```
 
 Example
@@ -19,7 +19,7 @@ Example
 label=NDX100
 instance=NDX
 interval=60
-command=$SCRIPT_DIR/i3blocks-yahoo/latest.py ^NDX
+command=$SCRIPT_DIR/i3blocks-contrib/i3blocks-yahoo/latest.py ^NDX
 ```
 
 ## Ticker
