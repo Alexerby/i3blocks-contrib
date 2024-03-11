@@ -37,7 +37,7 @@ if __name__ == "__main__":
         icon = '🠕' if percent_change > 0 else '🠗'
         
 
-        print(('{:.2f} <span color="{}">{}</span><span color="{}"> {:.2f}%</span>').format(index_value, color, icon, color, percent_change))
+        print(('{:.2f} <span color="{}">{} {:.2f}%</span>').format(index_value, color, icon, percent_change))
         
         # Optionally, you can exit with a specific code if the percentage change is urgent
         if abs(percent_change) > PRICE_CHANGE_URGENT_PERCENT:
