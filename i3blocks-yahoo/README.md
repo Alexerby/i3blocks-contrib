@@ -43,8 +43,10 @@ command=$SCRIPT_DIR/i3blocks-contrib/i3blocks-yahoo/latest.py ETH-USD
 separator_block_width=50
 ```
 
+> Note that label icons may not be visible in this README markdown.
+
 ### Ticker
-Find all tickers on Yahoo Finance [here](https://finance.yahoo.com/lookup/).A
+Find all tickers on Yahoo Finance [here](https://finance.yahoo.com/lookup/).
 
 ### Preview
 ![Selection_009](https://github.com/Alexerby/i3blocks-contrib/assets/57099109/c7b78073-c729-4f01-8120-1766ed5171cd)
