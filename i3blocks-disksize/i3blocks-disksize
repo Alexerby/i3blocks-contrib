@@ -1,7 +1,7 @@
 #!/bin/bash
 
-partition="$1"
-result=$(df -a | awk -v partition="$partition" 'tolower($1) ~ tolower(partition) {
+mount="$1"
+result=$(df -a | awk -v mount="$mount" '$6 == mount {
     size_gb = $4 / (1024^2);
 
     if (size_gb < 0.5)
@@ -14,4 +14,3 @@ result=$(df -a | awk -v partition="$partition" 'tolower($1) ~ tolower(partition)
 }')
 
 echo "$result"
-
