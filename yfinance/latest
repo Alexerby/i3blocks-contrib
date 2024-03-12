@@ -4,46 +4,53 @@
 import yfinance as yf
 import sys
 
-PRICE_CHANGE_PERIOD = '1d'  # You can adjust this period as needed
+PRICE_CHANGE_PERIOD = 'ytd'  # You can adjust this period as needed
 
-def get_ticker(ticker):
+def get_ticker_df(ticker):
     try:
         # Fetch data
         data = yf.Ticker(ticker)
-        
-        # Get current index value and opening price
-        current_index = data.history(period=PRICE_CHANGE_PERIOD)["Close"].iloc[-1]
-        open_price = data.history(period=PRICE_CHANGE_PERIOD)["Open"].iloc[-1]
+
+        data = yf.Ticker(ticker)
+        open_ytd = data.history(period="ytd")["Open"].iloc[0]
+        open_today = data.history(period="1d")["Open"].iloc[0]
+        current_price = data.history(period="1d")["Close"].iloc[0]
         
         # Calculate the percentage change
-        percent_change = ((current_index - open_price) / open_price) * 100
+        percent_change_today = ((current_price - open_today) / open_today) * 100
+        percent_change_ytd = ((current_price - open_ytd) / open_ytd) * 100
         
-        return current_index, percent_change
+        return current_price, percent_change_today, percent_change_ytd
     except Exception as e:
         print("Error fetching data:", e)
-        return None, None
+        return None, None, None
 
 if __name__ == "__main__":
+    # Check that ticker arg is provided
     if len(sys.argv) != 2:
         print("Usage: python script.py <ticker>")
         sys.exit(1)
     
     ticker = sys.argv[1]
-    ticker_value, percent_change = get_ticker(ticker)
-    if ticker_value is not None and percent_change is not None:
+    current_price, percent_change_today, percent_change_ytd = get_ticker_df(ticker)
+    variables = [current_price, percent_change_today, percent_change_ytd]
+    if all(variable is not None for variable in variables):
         # Determine the color and icon based on the percentage change
-        color = '#3BB92D' if percent_change > 0 else '#F7555E'
-        icon = '🠕' if percent_change > 0 else '🠗'
+        color_today = '#3BB92D' if percent_change_today > 0 else '#F7555E'
+        color_ytd = '#3BB92D' if percent_change_ytd > 0 else '#F7555E'
 
-        if ticker_value > 100:
+        # Icons
+        icon_today = '🠕' if percent_change_today > 0 else '🠗'
+
+        # Determine amount of decimals
+        if current_price > 100:
             decimal_places = 0
-        elif ticker_value < 100:
+        elif current_price < 100:
             decimal_places = 1
         else:
             decimal_places = 2
 
         
-        output_format='{:.{}f} <span color="{}">{} {:.2f}%</span>'
-        print(output_format.format(ticker_value, decimal_places, color, icon, percent_change))
-
+        output_format = '{:.{}f} <span color="{}">{:.2f}% {}</span>  <span color="{}">({:.2f}%)</span>'
+        print(output_format.format(current_price, decimal_places, color_today, percent_change_today, icon_today, color_ytd, percent_change_ytd)) 
 
