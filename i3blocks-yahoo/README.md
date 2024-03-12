@@ -49,7 +49,7 @@ separator_block_width=50
 Find all tickers on Yahoo Finance [here](https://finance.yahoo.com/lookup/).
 
 ### Preview
-![Selection_009](https://github.com/Alexerby/i3blocks-contrib/assets/57099109/c7b78073-c729-4f01-8120-1766ed5171cd)
+![Selection_010](https://github.com/Alexerby/i3blocks-contrib/assets/57099109/55128866-d68e-4755-a0c7-e8270ded1abd)
 
 
 
