@@ -3,23 +3,14 @@
 This is a script utilizing Yahoo Finance API to display the latest price in i3blocks.
 
 ## Configuration
-
-```ini
-[<label>]
-label=<label>
-instance=<label>
-interval=<interval>
-command=$SCRIPT_DIR/i3blocks-contrib/i3blocks-yahoo/latest <ticker>
-```
-
 ### Example Nasdaq 100
-
 ```ini
 [indice]
 label=NDX100
 instance=NDX
 interval=60
-command=$SCRIPT_DIR/i3blocks-contrib/i3blocks-yahoo/latest ^NDX
+command=$SCRIPT_DIR/i3blocks-contrib/yfinance/latest ^NDX
+separator_block_width=50
 ```
 
 ### Example BTC and ETH
@@ -31,7 +22,7 @@ separator=false
 instance=bitcoin
 interval=60
 command=$SCRIPT_DIR/i3blocks-crypto/crypto
-command=$SCRIPT_DIR/i3blocks-contrib/i3blocks-yahoo/latest BTC-USD
+command=$SCRIPT_DIR/i3blocks-contrib/yfinance/latest BTC-USD
 
 [crypto]
 label=󰡪
@@ -39,7 +30,7 @@ color=#5F7AE3
 separator=false
 instance=ethereum
 interval=60
-command=$SCRIPT_DIR/i3blocks-contrib/i3blocks-yahoo/latest ETH-USD
+command=$SCRIPT_DIR/i3blocks-contrib/yfinance/latest ETH-USD
 separator_block_width=50
 ```
 
