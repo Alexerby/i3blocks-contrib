@@ -1,0 +1,109 @@
+#!/usr/bin/python3
+
+import requests
+import os
+import json
+from datetime import datetime, timedelta
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
+class TemperatureNow():
+
+    def __init__(self):
+        self.API_KEY = os.getenv("API_KEY") 
+
+
+        # URL
+        self.base_url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
+        self.url_endpoint = f"Stockholm?unitGroup=metric&key={self.API_KEY}&contentType=json"
+        self.url = f"{self.base_url}{self.url_endpoint}"
+
+        # Request data
+        self.request = requests.get(self.url)
+        self.data = self.request.content
+
+    def latest_observed_date(self):
+        """
+        Returns the JSON object for the last observation date. 
+        """
+        date = datetime.today()
+
+        while True:
+            date_str = date.strftime("%Y-%m-%d")
+
+            # Use the latest observation
+            for day in json.loads(self.data)["days"]:
+                if day["datetime"] == date_str:
+                    return json.dumps(day, indent=2)
+            
+            # If the date is not found, go back one day
+            date -= timedelta(days=1)
+
+    def latest_observed_time(self):
+        """
+        Returns the JSON object for the last observation time that does not exceed the current time. 
+        """
+        json_last_date = json.loads(self.latest_observed_date())
+
+        # Get the current time
+        current_time = datetime.now().strftime("%H:%M:%S")
+        # Get the last observation time object
+        last_observation_time = None
+        for time_obj in json_last_date.get("hours", []):
+            if "datetime" in time_obj:
+                observation_time = time_obj["datetime"]
+                if observation_time <= current_time:
+                    last_observation_time = time_obj
+                else:
+                    break
+
+        return json.dumps(last_observation_time, indent=2)
+
+
+    def output(self):
+        latest_data = json.loads(self.latest_observed_time())
+
+        temp = latest_data["temp"]
+        conditions = latest_data["conditions"]
+        # temp = 25
+
+        # Define color codes for different temperature ranges
+        color = {
+            "very_cold": "#8ecae6",
+            "cold": "#219ebc",
+            "normal": "#023047",
+            "warm": "#ffb703",
+            "hot": "#fb8500"
+        }
+
+        icon = "󰏈"
+
+        # Determine color based on temperature range
+        if temp < -10:
+            temp_color = color["very_cold"]
+        elif -10 < temp < 5:
+            temp_color = color["cold"]
+        elif 5 < temp < 10 :
+            temp_color = color["normal"]
+        elif 10 < temp < 15 :
+            temp_color = color["warm"]
+        else:
+            temp_color = color["hot"]
+
+        if temp >= 15:
+            uv = f'UV-index: {latest_data["uvindex"]} | '
+
+        else:
+            uv = ""
+
+        # Format output with temperature and color
+
+        output_format = '<span color="{}">{} {} {}  {:.2f} 󰔄 </span>'
+        formatted_output = output_format.format(temp_color, uv, conditions, icon, temp)
+
+        print(formatted_output)
+
+temp_now = TemperatureNow()
+latest_observed_time = temp_now.output()
