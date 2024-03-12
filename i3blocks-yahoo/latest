@@ -39,7 +39,7 @@ if __name__ == "__main__":
             decimal_places = 0
         elif ticker_value < 100:
             decimal_places = 1
-        elif ticker_value < 50:
+        else:
             decimal_places = 2
 
         
