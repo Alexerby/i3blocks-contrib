@@ -11,3 +11,9 @@ Add an API key to a file called ".env" in i3blocks-weather dir, with API key.
 ```ini
 API_KEY=<API_KEY>
 ```
+## Configuration
+```ini
+[weather]
+command=$SCRIPT_DIR/i3blocks-contrib/weather/weather
+interval=300
+```
