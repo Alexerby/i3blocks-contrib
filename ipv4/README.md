@@ -7,7 +7,7 @@ Grabs IPv4 from ifconfig.
 [ipv4]
 label=IPv4
 interval=once
-command=$SCRIPT_DIR/i3blocks-contrib/i3blocks-ipv4/i3blocks-ipv4
+command=$SCRIPT_DIR/i3blocks-contrib/ipv4/ipv4
 ```
 
 ## Preview
