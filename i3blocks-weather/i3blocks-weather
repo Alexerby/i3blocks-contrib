@@ -63,47 +63,33 @@ class TemperatureNow():
 
 
     def output(self):
-        latest_data = json.loads(self.latest_observed_time())
+        latest_data_str = self.latest_observed_time()
+        latest_data = json.loads(latest_data_str)
 
-        temp = latest_data["temp"]
-        conditions = latest_data["conditions"]
-        # temp = 25
+        # Accessing temperature and conditions directly
+        temp = latest_data.get("temp", 25)
+        conditions = latest_data.get("conditions", "Unknown")
 
         # Define color codes for different temperature ranges
-        color = {
-            "very_cold": "#8ecae6",
-            "cold": "#219ebc",
-            "normal": "#023047",
-            "warm": "#ffb703",
-            "hot": "#fb8500"
+        temp_ranges = {
+            (-float('inf'), -10): "#8ecae6",
+            (-10, 5): "#219ebc",
+            (5, 10): "#023047",
+            (10, 15): "#ffb703",
+            (15, float('inf')): "#fb8500"
         }
 
-        icon = "󰏈"
-
         # Determine color based on temperature range
-        if temp < -10:
-            temp_color = color["very_cold"]
-        elif -10 < temp < 5:
-            temp_color = color["cold"]
-        elif 5 < temp < 10 :
-            temp_color = color["normal"]
-        elif 10 < temp < 15 :
-            temp_color = color["warm"]
-        else:
-            temp_color = color["hot"]
+        temp_color = next(color for temp_range, color in temp_ranges.items() if temp_range[0] < temp <= temp_range[1])
 
-        if temp >= 15:
-            uv = f'UV-index: {latest_data["uvindex"]} | '
-
-        else:
-            uv = ""
+        # Check UV index
+        uv = f'UV-index: {latest_data.get("uvindex", "N/A")} | ' if temp >= 15 else ""
 
         # Format output with temperature and color
-
-        output_format = '<span color="{}">{} {} {}  {:.2f} 󰔄 </span>'
-        formatted_output = output_format.format(temp_color, uv, conditions, icon, temp)
-
+        icon = "󰏈"
+        formatted_output = f'<span color="{temp_color}">{uv}{conditions} {icon} {temp:.2f} 󰔄 </span>'
         print(formatted_output)
+
 
 temp_now = TemperatureNow()
 latest_observed_time = temp_now.output()
