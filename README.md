@@ -1,3 +1,6 @@
+## List
+List of contributed scripts for [i3blocks](https://github.com/vivien/i3blocks).
+
 | Script Name                                     | Description                                     |
 |-------------------------------------------------|-------------------------------------------------|
 | [i3blocks-disksize](i3blocks-disksize/)         | Displays disk usage information                 |
